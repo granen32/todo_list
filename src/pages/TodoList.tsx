@@ -1,17 +1,49 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 const TodoList = () => {
-  const  {register} = useForm();
-  console.log(register("todo"));
+  const  {register, handleSubmit, formState} = useForm();
+  // handleSubmit이 validation 을 담당하게됨
+  const onValid = (data:any) =>{
+    console.log(data);
+  }
+  console.log(formState.errors)
   return (
     <>
     <div>
-      <form action="" >
+      <form 
+      style={{display:"flex", flexDirection: "column"}}
+      onSubmit={handleSubmit(onValid)}>
         <input 
+        {...register("Email", {required: true})}
         type="text" 
-        placeholder='write a todo'
+        placeholder="Email"
         />
-        <button type='button'>add</button>
+        <input 
+        {...register("FirstName", {required: true})}
+        type="text" 
+        placeholder="FirstName"
+        />
+        <input 
+        {...register("LastName", {required: true})}
+        type="text" 
+        placeholder="LastName"
+        />
+        <input 
+        {...register("UserName", {required: true, minLength:10})}
+        type="text" 
+        placeholder="UserName"
+        />
+        <input 
+        {...register("Password", {required: true, minLength:5})}
+        type="text" 
+        placeholder="Password"
+        />
+        <input 
+        {...register("PasswordConfirm", {required: "Password is required",minLength:5})}
+        type="text" 
+        placeholder="PasswordConfirm"
+        />
+        <button type='submit'>add</button>
       </form>
     </div>
     </>
