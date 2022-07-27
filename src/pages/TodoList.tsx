@@ -14,7 +14,13 @@ const TodoList = () => {
       style={{display:"flex", flexDirection: "column"}}
       onSubmit={handleSubmit(onValid)}>
         <input 
-        {...register("Email", {required: true})}
+        {...register("Email", {
+          required: true, 
+          pattern:{
+            value:/^[A-Za-z0-9._%+-]+@naver.com/,
+            message:"Only naver.com ps"
+          }})
+        }
         type="text" 
         placeholder="Email"
         />
@@ -39,7 +45,11 @@ const TodoList = () => {
         placeholder="Password"
         />
         <input 
-        {...register("PasswordConfirm", {required: "Password is required",minLength:5})}
+        {...register("PasswordConfirm", {required: "Password is required",
+        minLength:{
+          value:5,
+          message : "your password is short"
+        }})}
         type="text" 
         placeholder="PasswordConfirm"
         />
