@@ -11,4 +11,5 @@ export interface FormEdata {
   Password : string;
   PasswordConfirm : string;
   UserName: string;
+  
 }

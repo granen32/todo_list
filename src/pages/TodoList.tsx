@@ -2,7 +2,14 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import {FormEdata} from "../../@types/global" 
 const TodoList = () => {
-  const  {register, handleSubmit, formState:{errors}} = useForm<FormEdata>();
+  const  {
+    register, 
+    handleSubmit, 
+    formState:{errors}} = useForm<FormEdata>({
+    defaultValues :{
+      Email: "@naver.com"
+    }
+  });
   // handleSubmit이 validation 을 담당하게됨
   const onValid = (data:any) =>{
     console.log(data);
@@ -26,25 +33,27 @@ const TodoList = () => {
         />
         <span>{errors?.Email?.message}</span>
         <input 
-        {...register("FirstName", {required: true})}
+        {...register("FirstName", {
+          required: "FirstName is required"
+        })}
         type="text" 
         placeholder="FirstName"
         />
         <span>{errors?.FirstName?.message}</span>
         <input 
-        {...register("LastName", {required: true})}
+        {...register("LastName", {required: "LastName is required"})}
         type="text" 
         placeholder="LastName"
         />
         <span>{errors?.LastName?.message}</span>
         <input 
-        {...register("UserName", {required: true, minLength:10})}
+        {...register("UserName", {required: "UserName is required", minLength:10})}
         type="text" 
         placeholder="UserName"
         />
         <span>{errors?.UserName?.message}</span>
         <input 
-        {...register("Password", {required: true, minLength:5})}
+        {...register("Password", {required: "Password is required", minLength:5})}
         type="text" 
         placeholder="Password"
         />
