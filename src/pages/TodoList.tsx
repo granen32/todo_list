@@ -1,19 +1,30 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import {FormEdata} from "../../@types/global" 
+import {
+  FormEdata
+} from "../../@types/global" 
 const TodoList = () => {
   const  {
     register, 
-    handleSubmit, 
+    handleSubmit,
+    setError, 
     formState:{errors}} = useForm<FormEdata>({
     defaultValues :{
       Email: "@naver.com"
     }
   });
   // handleSubmit이 validation 을 담당하게됨
-  const onValid = (data:any) =>{
-    console.log(data);
+  const onValid = (data:FormEdata) =>{
+    if(data.Password !== data.PasswordConfirm){
+      setError("Password", {
+        message : "Password are not the same"
+      })
+    }
+    setError("extraError", {
+      message : "server error"
+    })
   }
+  console.log(errors);
   return (
     <>
     <div>
@@ -69,6 +80,7 @@ const TodoList = () => {
         />
         <span>{errors?.PasswordConfirm?.message}</span>
         <button type='submit'>add</button>
+        <span>{errors?.extraError?.message}</span>
       </form>
     </div>
     </>
