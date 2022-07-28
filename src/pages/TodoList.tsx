@@ -1,12 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import {FormEdata} from "../../@types/global" 
 const TodoList = () => {
-  const  {register, handleSubmit, formState} = useForm();
+  const  {register, handleSubmit, formState:{errors}} = useForm<FormEdata>();
   // handleSubmit이 validation 을 담당하게됨
   const onValid = (data:any) =>{
     console.log(data);
   }
-  console.log(formState.errors)
   return (
     <>
     <div>
@@ -15,7 +15,7 @@ const TodoList = () => {
       onSubmit={handleSubmit(onValid)}>
         <input 
         {...register("Email", {
-          required: true, 
+          required: "Email is required", 
           pattern:{
             value:/^[A-Za-z0-9._%+-]+@naver.com/,
             message:"Only naver.com ps"
@@ -24,26 +24,31 @@ const TodoList = () => {
         type="text" 
         placeholder="Email"
         />
+        <span>{errors?.Email?.message}</span>
         <input 
         {...register("FirstName", {required: true})}
         type="text" 
         placeholder="FirstName"
         />
+        <span>{errors?.FirstName?.message}</span>
         <input 
         {...register("LastName", {required: true})}
         type="text" 
         placeholder="LastName"
         />
+        <span>{errors?.LastName?.message}</span>
         <input 
         {...register("UserName", {required: true, minLength:10})}
         type="text" 
         placeholder="UserName"
         />
+        <span>{errors?.UserName?.message}</span>
         <input 
         {...register("Password", {required: true, minLength:5})}
         type="text" 
         placeholder="Password"
         />
+        <span>{errors?.Password?.message}</span>
         <input 
         {...register("PasswordConfirm", {required: "Password is required",
         minLength:{
@@ -53,6 +58,7 @@ const TodoList = () => {
         type="text" 
         placeholder="PasswordConfirm"
         />
+        <span>{errors?.PasswordConfirm?.message}</span>
         <button type='submit'>add</button>
       </form>
     </div>
