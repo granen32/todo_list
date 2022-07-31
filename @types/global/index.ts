@@ -1,6 +1,6 @@
 // 투두리스트 폼 데이타
 export interface FormEdata {
-  error : {
+  errors : {
     email:{
       message : string;
     }
@@ -11,5 +11,6 @@ export interface FormEdata {
   Password : string;
   PasswordConfirm : string;
   UserName: string;
+  // 에러 생성 메세지 생ㅓ
   extraError? : string;
 }

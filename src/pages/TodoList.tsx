@@ -18,10 +18,13 @@ const TodoList = () => {
     if(data.Password !== data.PasswordConfirm){
       setError("Password", {
         message : "Password are not the same"
+      },{
+        shouldFocus :true,
       })
     }
     setError("extraError", {
-      message : "server error"
+      message : "server offline."
+      // seterror 는 인풋에 강제 포커스가 가능함
     })
   }
   console.log(errors);
@@ -45,7 +48,9 @@ const TodoList = () => {
         <span>{errors?.Email?.message}</span>
         <input 
         {...register("FirstName", {
-          required: "FirstName is required"
+          required: "FirstName is required",
+          validate: (value) => !value.includes("granen"),
+          // value 값에 != 포함되는 "granen"이 있으면 금지할것
         })}
         type="text" 
         placeholder="FirstName"
@@ -58,7 +63,7 @@ const TodoList = () => {
         />
         <span>{errors?.LastName?.message}</span>
         <input 
-        {...register("UserName", {required: "UserName is required", minLength:10})}
+        {...register("UserName", {required: "UserName is required", minLength:5})}
         type="text" 
         placeholder="UserName"
         />
