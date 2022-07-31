@@ -19,3 +19,9 @@ export interface FormEdata {
 export interface TodoListProps {
   toDo : string
 }
+// settodo
+export interface TodoListTypeProps {
+  text : string,
+  id : number,
+  category : "DOEN" | "DONE" | "TO_DO";
+}
