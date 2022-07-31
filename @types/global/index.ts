@@ -14,3 +14,8 @@ export interface FormEdata {
   // 에러 생성 메세지 생ㅓ
   extraError? : string;
 }
+
+// todo list
+export interface TodoListProps {
+  toDo : string
+}
